@@ -4,6 +4,9 @@ public class StringAddCalculator {
     private static final String SPLIT_REGEX = ",|:";
     private static final String PREFIX_CUSTOM_SEPARATOR_REGEX = "//(.)\\n(.*)";
 
+    private StringAddCalculator() {
+    }
+
     public static int splitAndSum(String text) {
         if (StringUtils.isEmpty(text)) {
             return 0;
@@ -24,12 +27,16 @@ public class StringAddCalculator {
         int sum = 0;
         for (String number : numbers) {
             int num = Integer.parseInt(number);
-            if (num < 0) {
-                throw new RuntimeException();
-            }
+            checkInvalidNumber(num);
             sum += num;
         }
         return sum;
+    }
+
+    private static void checkInvalidNumber(int num) {
+        if (num < 0) {
+            throw new InvalidNumberException();
+        }
     }
 
     private static boolean isCustomSeparator(String text) {

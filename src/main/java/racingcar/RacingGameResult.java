@@ -5,28 +5,29 @@ import java.util.stream.Collectors;
 
 public class RacingGameResult {
     private final List<Round> rounds;
-    private final List<CarSnapshot> winners;
+    private final List<ImmutableCar> winners;
 
     public RacingGameResult(List<Round> rounds) {
         this.rounds = rounds;
-        this.winners = getFirstCars(rounds.get(rounds.size() - 1));
+        this.winners = initWinners(rounds.get(rounds.size() - 1));
     }
 
     public List<Round> getRounds() {
         return rounds;
     }
 
-    public List<CarSnapshot> getWinners() {
+    public List<ImmutableCar> getWinners() {
         return winners;
     }
 
-    private List<CarSnapshot> getFirstCars(Round lastRound) {
-        int firstCarPosition = lastRound.getCarList().stream()
-                .sorted(CarSnapshot::compareTo)
-                .map(CarSnapshot::getPosition)
+    private List<ImmutableCar> initWinners(Round lastRound) {
+        int winnerPosition = lastRound.getCarList().stream()
+                .sorted(ImmutableCar::compareTo)
+                .map(ImmutableCar::getPosition)
                 .findFirst().orElseThrow(IllegalStateException::new);
+
         return lastRound.getCarList().stream()
-                .filter(car -> firstCarPosition == car.getPosition())
+                .filter(car -> winnerPosition == car.getPosition())
                 .collect(Collectors.toList());
     }
 

@@ -23,6 +23,7 @@ public class InputView {
 
     private static List<Car> convertCarList(String carString) {
         return Arrays.stream(carString.split(","))
+                .map(String::trim)
                 .map(Car::new)
                 .collect(Collectors.toList());
     }

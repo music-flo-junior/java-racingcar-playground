@@ -11,10 +11,10 @@ class RoundTest {
 
     @Test
     void 라운드_복사_테스트() {
-        List<CarSnapshot> carList = new ArrayList<>();
-        carList.add(new CarSnapshot("포르쉐", 1));
-        carList.add(new CarSnapshot("람보르기니", 2));
-        carList.add(new CarSnapshot("마세라티", 2));
+        List<ImmutableCar> carList = new ArrayList<>();
+        carList.add(new ImmutableCar("포르쉐", 1));
+        carList.add(new ImmutableCar("람보르기니", 2));
+        carList.add(new ImmutableCar("마세라티", 2));
         Round round = new Round(carList);
         Round round2 = new Round(round.getCarList());
 

@@ -19,13 +19,13 @@ public class ResultView {
     }
 
     private static void showRound(Round round) {
-        for (CarSnapshot car : round.getCarList()) {
+        for (ImmutableCar car : round.getCarList()) {
             System.out.println(convertCarResult(car));
         }
         System.out.println();
     }
 
-    private static String convertCarResult(CarSnapshot car) {
+    private static String convertCarResult(ImmutableCar car) {
         return String.format("%s : %s", car.getName(), convertPositionToString(car.getPosition()));
     }
 
@@ -37,8 +37,8 @@ public class ResultView {
         return builder.toString();
     }
 
-    private static void showWinners(List<CarSnapshot> winners) {
-        String winnerString = winners.stream().map(CarSnapshot::getName).collect(Collectors.joining(", "));
+    private static void showWinners(List<ImmutableCar> winners) {
+        String winnerString = winners.stream().map(ImmutableCar::getName).collect(Collectors.joining(", "));
         System.out.println(winnerString + "가 최종 우승했습니다.");
     }
 }

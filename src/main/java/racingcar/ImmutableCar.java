@@ -2,11 +2,11 @@ package racingcar;
 
 import java.util.Objects;
 
-public class CarSnapshot implements Comparable<CarSnapshot> {
+public class ImmutableCar implements Comparable<ImmutableCar> {
     private final String name;
     private final int position;
 
-    public CarSnapshot(String name, int position) {
+    public ImmutableCar(String name, int position) {
         this.name = name;
         this.position = position;
     }
@@ -20,7 +20,7 @@ public class CarSnapshot implements Comparable<CarSnapshot> {
     }
 
     @Override
-    public int compareTo(CarSnapshot car) {
+    public int compareTo(ImmutableCar car) {
         return Integer.compare(car.getPosition(), this.position);
     }
 
@@ -28,7 +28,7 @@ public class CarSnapshot implements Comparable<CarSnapshot> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CarSnapshot car = (CarSnapshot) o;
+        ImmutableCar car = (ImmutableCar) o;
         return position == car.position && Objects.equals(name, car.name);
     }
 

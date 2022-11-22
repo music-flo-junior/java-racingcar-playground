@@ -9,6 +9,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RacingGameTest {
+    public static final int ROUND = 5;
     private RacingGame racingGame;
 
     @BeforeEach
@@ -18,11 +19,13 @@ class RacingGameTest {
 
     @Test
     void 게임_플레이_랜덤() {
-        // given
         RacingGameResult result = racingGame.startGameAndGetResult();
-        List<CarSnapshot> winners = result.getWinners();
+        List<ImmutableCar> winners = result.getWinners();
+
         ResultView.showGame(result);
-        assertThat(winners.size()).isGreaterThanOrEqualTo(1);
+
+        assertThat(winners).isNotEmpty();
+        assertThat(result.getRounds()).hasSize(ROUND + 1);
     }
 
     private List<Car> initRacingCars() {
