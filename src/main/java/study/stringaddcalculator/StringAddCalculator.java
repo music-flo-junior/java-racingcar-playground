@@ -19,11 +19,10 @@ public class StringAddCalculator {
             return 0;
         }
 
-        if (parameter.length() == 1 && StringUtils.isNumeric(parameter)) {
+        if (StringUtils.isNumeric(parameter)) {
             return Integer.parseInt(parameter);
         }
 
-        // 개선..
         return new CustomTokenMatcher(parameter).getContent()
                 .stream()
                 .mapToInt(str -> {

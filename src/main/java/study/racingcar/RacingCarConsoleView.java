@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * @author 최현범(Jayce) / hb.choi@dreamus.io
  * @since 2022/11/19
  */
-public class RacingCarConsoleView implements RacingCarInputView {
+public class RacingCarConsoleView implements RacingCarView {
 
     private final Scanner scanner = new Scanner(System.in);
 

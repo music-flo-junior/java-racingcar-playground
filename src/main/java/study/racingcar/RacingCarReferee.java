@@ -12,14 +12,13 @@ import static java.util.stream.Collectors.toList;
  */
 public class RacingCarReferee {
 
-    private static final int FORWARD_MINIMUM_RULE_LIMIT = 4;
-
-    private static final int FORWARD_MAXIMUM_RULE_LIMIT = 10;
-
     private final List<Car> cars;
 
-    public RacingCarReferee(List<Car> cars) {
+    private final ForwardStrategy forwardStrategy;
+
+    public RacingCarReferee(List<Car> cars, ForwardStrategy forwardStrategy) {
         this.cars = cars;
+        this.forwardStrategy = forwardStrategy;
     }
 
     public List<Car> judge() {
@@ -42,6 +41,7 @@ public class RacingCarReferee {
     }
 
     private boolean isForward() {
-        return FORWARD_MINIMUM_RULE_LIMIT < RandomUtils.getInt(FORWARD_MAXIMUM_RULE_LIMIT);
+        return forwardStrategy.forwardable();
     }
+
 }

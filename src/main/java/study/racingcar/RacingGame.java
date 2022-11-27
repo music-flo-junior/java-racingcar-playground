@@ -10,22 +10,24 @@ import java.util.List;
  */
 public class RacingGame {
 
-    private final RacingCarInputView racingCarInputView;
+    private final RacingCarView racingCarView;
 
-    public RacingGame(RacingCarInputView racingCarInputView) {
-        this.racingCarInputView = racingCarInputView;
+    private final List<Car> cars;
+
+    private final int numberOfAttempt;
+
+    public RacingGame(RacingCarView racingCarView, List<Car> cars, int numberOfAttempt) {
+        this.racingCarView = racingCarView;
+        this.cars = cars;
+        this.numberOfAttempt = numberOfAttempt;
     }
 
     public void start() {
-        List<Car> cars = racingCarInputView.inputCars();
-        int numberOfAttempt = racingCarInputView.inputNumberOfAttempt();
-        RacingCarReferee referee = new RacingCarReferee(cars);
-
-        racingCarInputView.printResultLabel();
+        RacingCarReferee referee = new RacingCarReferee(cars, new RandomForwardable());
+        racingCarView.printResultLabel();
         for (int i = 0; i < numberOfAttempt; i++) {
-            racingCarInputView.print(referee.judge());
+            racingCarView.print(referee.judge());
         }
-
-        racingCarInputView.printWinners(referee.getWinners());
+        racingCarView.printWinners(referee.getWinners());
     }
 }

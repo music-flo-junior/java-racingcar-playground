@@ -1,6 +1,6 @@
 package study.racingcar;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * 설명:
@@ -10,11 +10,10 @@ import java.util.Random;
  */
 public class RandomUtils {
 
-    private RandomUtils(){}
-
-    private static final Random random = new Random();
+    private RandomUtils() {
+    }
 
     public static int getInt(int limit) {
-        return random.nextInt(limit);
+        return ThreadLocalRandom.current().nextInt(limit);
     }
 }

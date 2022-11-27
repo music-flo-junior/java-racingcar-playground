@@ -8,7 +8,7 @@ import java.util.List;
  * @author 최현범(Jayce) / hb.choi@dreamus.io
  * @since 2022/11/19
  */
-public interface RacingCarInputView {
+public interface RacingCarView {
 
     List<Car> inputCars();
 

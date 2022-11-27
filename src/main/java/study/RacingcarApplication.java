@@ -1,8 +1,11 @@
 package study;
 
+import study.racingcar.Car;
 import study.racingcar.RacingCarConsoleView;
-import study.racingcar.RacingCarInputView;
+import study.racingcar.RacingCarView;
 import study.racingcar.RacingGame;
+
+import java.util.List;
 
 /**
  * 설명:
@@ -13,8 +16,10 @@ import study.racingcar.RacingGame;
 public class RacingcarApplication {
 
     public static void main(String[] args) {
-        RacingCarInputView racingCarInputView = new RacingCarConsoleView();
-        RacingGame racingGame = new RacingGame(racingCarInputView);
+        RacingCarView racingCarView = new RacingCarConsoleView();
+        List<Car> cars = racingCarView.inputCars();
+        int numberOfAttempt = racingCarView.inputNumberOfAttempt();
+        RacingGame racingGame = new RacingGame(racingCarView, cars, numberOfAttempt);
         racingGame.start();
     }
 }
