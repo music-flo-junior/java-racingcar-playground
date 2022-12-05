@@ -2,30 +2,32 @@ package racingcar.util;
 
 import racingcar.model.RacingCar;
 import racingcar.model.RacingCarGameResult;
+import racingcar.model.Round;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class ResultView {
+    private static final String POSITION_STRING = "-";
+
+    private final Scanner sc = new Scanner(System.in);
+
     public void printResultView(RacingCarGameResult result) {
 
         System.out.println("\n실행 결과");
 
-        List<RacingCar> racingCars = result.getRacingCars();
-        int attemptCount = racingCars.get(0).getAttemptCount();
+        result.getRounds().forEach(this::printRacingRound);
 
-        for (int i = 0; i < attemptCount; i++) {
-            for (RacingCar racingCar : racingCars) {
-                System.out.print(racingCar.getName() + " : " + racingCar.getPositionHistory().get(i) + "\n");
-            }
-            System.out.println();
-        }
+        System.out.println("\n" + result.getWinners().stream().map(RacingCar::getName).collect(Collectors.joining(",")) + "가 최종 우승했습니다.\n");
+    }
 
-        if (result.getChampionCarNamesStr() == null) {
-            System.out.println("\n최종 우승자가 존재하지 않습니다.\n");
-        } else {
-            System.out.println("\n" + result.getChampionCarNamesStr() + "가 최종 우승했습니다.\n");
-        }
+    private void printRacingRound(Round round) {
+        Map<RacingCar, Integer> positionSnapshot = round.getPositionSnapshot();
+        System.out.println();
+        new ArrayList<>(positionSnapshot.keySet())
+                .forEach(racingCar -> System.out.println(racingCar.getName() + " : " + POSITION_STRING.repeat(positionSnapshot.get(racingCar))));
     }
 
     public boolean isRestart() {
@@ -34,7 +36,6 @@ public class ResultView {
 
         System.out.println("경주를 새로 시작하려면 0, 종료하려면 1를 입력하세요.");
 
-        Scanner sc = new Scanner(System.in);
         int restartInput = sc.nextInt();
 
         while (restartInput != 0 && restartInput != 1) {
