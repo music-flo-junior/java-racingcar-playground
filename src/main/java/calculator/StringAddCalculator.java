@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class StringAddCalculator {
 
     public static int splitAndSum(String inputText) {
+
         if (inputText == null || inputText.isEmpty()) {
             return 0;
         }
@@ -20,6 +21,7 @@ public class StringAddCalculator {
         String[] tokens;
 
         Matcher m = Pattern.compile("//(.)\n(.*)").matcher(inputText);
+
         if (m.find()) {
             String customDelimiter = m.group(1);
             tokens = m.group(2).split(customDelimiter);
@@ -30,6 +32,15 @@ public class StringAddCalculator {
         return addTokens(tokens);
     }
 
+    public static boolean isPositiveNumber(String inputText) {
+        int inputInt = Integer.parseInt(inputText);
+        if (inputInt >= 0) {
+            return true;
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
     private static int addTokens(String[] tokens) {
         int result = 0;
         for (String token : tokens) {
@@ -38,14 +49,5 @@ public class StringAddCalculator {
             }
         }
         return result;
-    }
-
-    public static boolean isPositiveNumber(String inputText) {
-        int inputInt = Integer.parseInt(inputText);
-        if (inputInt >= 0) {
-            return true;
-        } else {
-            throw new RuntimeException();
-        }
     }
 }

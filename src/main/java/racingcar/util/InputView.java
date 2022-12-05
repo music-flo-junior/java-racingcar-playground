@@ -3,12 +3,14 @@ package racingcar.util;
 import java.util.Scanner;
 
 public class InputView {
+
+    private final Scanner sc = new Scanner(System.in);
+
     public void printInputRacingCarNameView() {
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
     }
 
     public String scanRacingCarName() {
-        Scanner sc = new Scanner(System.in);
         String inputString = sc.nextLine();
 
         while (inputString == null || inputString.isEmpty()) {
@@ -23,7 +25,6 @@ public class InputView {
     public int scanRacingCarGameAttemptCount() {
         System.out.println("시도할 회수는 몇회인가요? : ");
 
-        Scanner sc = new Scanner(System.in);
         int inputInt = sc.nextInt();
 
         while (inputInt <= 0) {

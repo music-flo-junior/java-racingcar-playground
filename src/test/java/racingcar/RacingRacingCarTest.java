@@ -20,7 +20,7 @@ public class RacingRacingCarTest {
     @Mock
     ResultView resultView = new ResultView();
     @Mock
-    RacingCarGame racingCarGame = new RacingCarGame();
+    RacingGameApplication racingGameApplication = new RacingGameApplication();
 
     @Test
     public void splitToArray_null_또는_빈문자() {
@@ -66,7 +66,7 @@ public class RacingRacingCarTest {
     @DisplayName("경주할 자동차들 제대로 달리는지 테스트 ")
     public void runRacingCar() {
         List<RacingCar> racingCars = RacingCar.createRacingCars(new String[]{"hi", "bye", "hello"}, 5);
-        racingCars.get(0).runByAttemptCount();
+        racingCars.get(0).runByAttemptCount(attemptCount);
         assertThat(racingCars.get(0).getPositionHistory().size()).isEqualTo(5);
     }
 
@@ -74,8 +74,9 @@ public class RacingRacingCarTest {
     @DisplayName("레이싱 결과 출력 테스트 ")
     public void printRacingResultPrint() {
         List<RacingCar> racingCars = RacingCar.createRacingCars(new String[]{"hi", "bye", "hello"}, 5);
-        racingCarGame.racing(racingCars);
+        racingGameApplication.racing(racingCars, attemptCount);
         RacingCarGameResult result = new RacingCarGameResult(racingCars);
-        resultView.printResultView(result);
+        resultView.printResultView(result, attemptCount);
+        //FIXME :: result 값이 제대로 들어간지 체크..!
     }
 }

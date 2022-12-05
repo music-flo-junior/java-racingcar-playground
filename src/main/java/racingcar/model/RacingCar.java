@@ -6,47 +6,22 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import racingcar.util.NumberUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class RacingCar {
 
-    String name;
-    String position;
-    Map<Integer, String> positionHistory;
+    private final int MOVE_ABLE_MIN_COUNT = 4;
 
-    int attemptCount;
+    private final String name;
+    private Position position;
 
-    public static List<RacingCar> createRacingCars(String[] racingCarNameArray, int attemptCount) {
-        List<RacingCar> racingCars = new ArrayList<>(racingCarNameArray.length);
-        for (String racingCarName : racingCarNameArray) {
-            RacingCar racingCar = new RacingCar(racingCarName, "", new HashMap<>(attemptCount), 5);
-            racingCars.add(racingCar);
-        }
-        return racingCars;
+    public boolean isMoveAble() {
+        return NumberUtil.createRandomNumber() >= MOVE_ABLE_MIN_COUNT;
     }
 
-    public void runByAttemptCount() {
-        for (int i = 0; i < this.attemptCount; i++) {
-            if (isIncreasePosition()) {
-                this.position = this.position + "-";
-            }
-            this.positionHistory.put(i, this.position);
-        }
+    public void moveForward() {
+        position.moveForward();
     }
-
-    public boolean isSamePosition(String maxPosition) {
-        return this.position.equals(maxPosition);
-    }
-
-    private boolean isIncreasePosition() {
-        return NumberUtil.createRandomNumber() >= 4;
-    }
-
 }
